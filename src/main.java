@@ -20,31 +20,41 @@ public class main {
         showDrinkList();
 
         int selectedDrinkId = getSelectedDrinkIdFromUser();
-        showDrinkInfo(selectedDrinkId);
+        if (selectedDrinkId != 0) { // TODO: Eğer seçilen ürün numarası 0 olarak girilirse else'e gidiliyor sonradan düzenlenebilir.
+            showDrinkInfo(selectedDrinkId);
+        } else {
+            System.out.println("Yanlış değer girdiniz!");
+        }
     }
 
     public static void showDrinkInfo(int selectedDrinkId) {
+        int id = selectedDrinkId;
 
-        if (selectedDrinkId == espresso.getCoffeeId()) {
+        if (id == espresso.getCoffeeId()) {
             getEspressoInfo();
 
-        } else if (selectedDrinkId == doubleEspresso.getCoffeeId()) {
+        } else if (id == doubleEspresso.getCoffeeId()) {
             getDoubleEspressoInfo();
 
-        } else if (selectedDrinkId == cappuccino.getCoffeeId()) {
+        } else if (id == cappuccino.getCoffeeId()) {
             getCappuccinoInfo();
 
-        } else if (selectedDrinkId == caffeLatte.getCoffeeId()) {
+        } else if (id == caffeLatte.getCoffeeId()) {
             getCaffeLatteInfo();
 
-        } else if (selectedDrinkId == mocha.getCoffeeId()) {
+        } else if (id == mocha.getCoffeeId()) {
             getMochaInfo();
 
-        } else if (selectedDrinkId == americano.getCoffeeId()) {
+        } else if (id == americano.getCoffeeId()) {
             getAnmericanoInfo();
 
-        } else if (selectedDrinkId == hotWater.getCoffeeId()) {
+        } else if (id == hotWater.getCoffeeId()) {
             getHotWaterInfo();
+
+        } else {
+            System.out.println("Lütfen doğru ürün numarasını girin");
+            id = getSelectedDrinkIdFromUser();
+            showDrinkInfo(id);
         }
     }
 
@@ -98,6 +108,9 @@ public class main {
 
         System.out.print("Seçiminiz: ");
         Scanner input = new Scanner(System.in);
+        if (!input.hasNextInt()) {
+            return 0;
+        }
         return input.nextInt();
     }
 
